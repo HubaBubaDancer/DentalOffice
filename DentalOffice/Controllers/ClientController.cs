@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DentalOffice.Controllers;
 
-[Authorize("User")]
+[Authorize]
 [Route("api/[controller]")]
 public class ClientController : Controller
 {

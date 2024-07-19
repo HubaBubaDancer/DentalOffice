@@ -2,6 +2,7 @@ using DentalOffice.Areas.Identity.Data;
 using DentalOffice.Dtos;
 using DentalOffice.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.DotNet.Scaffolding.Shared.Project;
 
 namespace DentalOffice.Handlers;
 
@@ -15,9 +16,9 @@ public interface IRegistrationHandler
 public class RegistrationHandler : IRegistrationHandler
 {
     private readonly ApplicationDbContext _context;
-    private readonly UserManager<IdentityUser> _userManager;
+    private readonly UserManager<ApplicationUser> _userManager;
 
-    public RegistrationHandler(ApplicationDbContext context, UserManager<IdentityUser> userManager)
+    public RegistrationHandler(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
     {
         _context = context;
         _userManager = userManager;
@@ -29,14 +30,16 @@ public class RegistrationHandler : IRegistrationHandler
         {
             UserName = model.FirstName,
             Email = model.Email,
-            PhoneNumber = model.Phone
+            PhoneNumber = model.Phone,
+            FirstName = model.FirstName,
+            LastName = model.LastName
         };
         
         var result = await _userManager.CreateAsync(user, model.Password);
         
         if (result.Succeeded)
         {
-            await _userManager.AddToRoleAsync(user, "Doctor");
+            await _userManager.AddToRoleAsync(user, "User");
         }
     }
     

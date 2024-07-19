@@ -3,21 +3,15 @@ using DentalOffice.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
 
-namespace DentalOffice.Areas.Identity.Data;
 
-public class AuthDbContext : IdentityDbContext<ApplicationUser>
+namespace DentalOffice.Areas.Identity.Data
 {
-    public AuthDbContext(DbContextOptions<AuthDbContext> options)
-        : base(options)
+    public class AuthDbContext : IdentityDbContext<ApplicationUser>
     {
-    }
-    
-    protected override void OnModelCreating(ModelBuilder builder)
-    {
-        base.OnModelCreating(builder);
-        
-        
-        
+        public AuthDbContext(DbContextOptions<AuthDbContext> options) : base(options)
+        {
+        }
     }
 }

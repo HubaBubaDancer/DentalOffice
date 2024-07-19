@@ -18,7 +18,7 @@ public class RegistrationController : Controller
     }
 
     
-    [Authorize("Doctor, Admin")]
+    [Authorize(Roles = "Doctor,Admin")]
     [HttpPost("/register-doctor")]
     public async Task<IActionResult> RegisterUser([FromBody] DoctorDto doctor)
     {

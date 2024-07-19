@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DentalOffice.Controllers;
 
-[Authorize("Doctor, Admin")]
+[Authorize(Roles = "Doctor,Admin")]
 [Route("api/[controller]")]
 public class DoctorController : ControllerBase
 {
@@ -44,15 +44,13 @@ public class DoctorController : ControllerBase
     [HttpGet("get-all-appointments")]
     public async Task<IActionResult> GetAllAppointments()
     {
-        await _appointmentHandler.GetAppointments();
-        return Ok();
+        return Ok(await _appointmentHandler.GetAppointments());
     }
     
-    [HttpGet("get-appointment-by-id/{id}")]
+    [HttpGet("get-appointment-by-doctor-id/{id}")]
     public async Task<IActionResult> GetAppointmentByDoctorId(Guid id)
     {
-        await _appointmentHandler.GetAppointmentsByDoctorId(id);
-        return Ok();
+        return Ok(await _appointmentHandler.GetAppointmentsByDoctorId(id));
     }
     
     [HttpDelete("delete-appointment/{id}")]
